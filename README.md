@@ -6,11 +6,11 @@
 
 ### Screenshots
 
-![Main Menu Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/menu_screen.png)
-![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/gameplay.png)
-![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/coordinate_finder.png)
-![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/ghost_mode.png)
-![Game Over Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/timesup.png)
+![Main Menu Placeholder](https://github.com/ibrahimsezer/chess-warmup/blob/main/public/screenshots/menu_screen.png?raw=true)
+![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/blob/main/public/screenshots/gameplay.png?raw=true)
+![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/blob/main/public/screenshots/coordinate_finder.png?raw=true)
+![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/blob/main/public/screenshots/ghost_mode.png?raw=true)
+![Game Over Placeholder](https://github.com/ibrahimsezer/chess-warmup/blob/main/public/screenshots/timesup.png?raw=true)
 
 ## ✨ Features
 
