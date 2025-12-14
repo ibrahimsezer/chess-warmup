@@ -134,11 +134,11 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
 
 function ModeButton({ title, desc, icon, bg, hover, iconBg, borderColor, overlayIcon, onClick, extraEffect, accentColor }) {
     return (
-        <button onClick={onClick} className={`w-full ${bg} p-4 rounded-xl flex items-center justify-between transition-all duration-300 group/btn border ${borderColor} ${hover} relative overflow-hidden active:scale-95`}>
+        <button onClick={onClick} className={`w-full ${bg} p-4 rounded-xl flex items-center justify-start transition-all duration-300 group/btn border ${borderColor} ${hover} relative overflow-hidden active:scale-95`}>
             {extraEffect && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-aqua/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-1000" />}
 
             {/* Overlay Icon (Background decoration) */}
-            <div className="opacity-0 group-hover/btn:opacity-100 transition-all duration-500 transform scale-50 group-hover/btn:scale-100 pointer-events-none">
+            <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-100 transition-all duration-500 transform scale-50 group-hover/btn:scale-100 pointer-events-none flex items-center justify-end">
                 {overlayIcon}
             </div>
 
