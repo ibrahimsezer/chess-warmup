@@ -52,7 +52,7 @@ export default function ChessVisionTrainer() {
             }, 1000);
         }
         return () => clearInterval(timerRef.current);
-    }, [gameState]);
+    }, [gameState, mode]);
 
     const nextTurn = () => {
         setFeedback(null);
@@ -143,23 +143,23 @@ export default function ChessVisionTrainer() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-900 text-white font-sans flex flex-col items-center justify-center p-4">
+        <div className="min-h-screen bg-surface text-white font-sans flex flex-col items-center justify-center p-4 selection:bg-aqua selection:text-black">
 
             {/* Header & Language Toggle */}
-            <div className="mb-6 text-center relative w-full max-w-4xl flex flex-col items-center">
+            <div className="mb-8 text-center relative w-full max-w-4xl flex flex-col items-center">
                 <button
                     onClick={toggleLanguage}
-                    className="absolute right-0 top-0 p-2 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition-colors flex items-center gap-2 text-sm font-bold text-slate-300"
+                    className="absolute right-0 top-0 p-2 bg-white/5 hover:bg-aqua hover:text-black rounded-lg border border-white/10 transition-all duration-300 flex items-center gap-2 text-sm font-bold text-slate-300 hover:border-aqua"
                 >
                     <Globe className="w-4 h-4" />
                     {lang === 'tr' ? 'EN' : 'TR'}
                 </button>
 
-                <h1 className="text-3xl md:text-4xl font-bold text-amber-500 mb-2 flex items-center justify-center gap-2">
-                    <Brain className="w-8 h-8 md:w-10 md:h-10" />
+                <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-aqua to-emerald-400 mb-2 flex items-center justify-center gap-3 drop-shadow-lg">
+                    <Brain className="w-10 h-10 md:w-12 md:h-12 text-aqua" />
                     {t.header.title}
                 </h1>
-                <p className="text-slate-400 text-sm">{t.header.subtitle}</p>
+                <p className="text-slate-400 text-sm md:text-base tracking-widest uppercase font-medium">{t.header.subtitle}</p>
             </div>
 
             {/* Screens - t (translation) prop'u iletiliyor */}
