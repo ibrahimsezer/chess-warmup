@@ -1,7 +1,7 @@
 export const translations = {
     tr: {
         header: {
-            title: "Satranç Vizyonu",
+            title: "Satranç Isınması",
             subtitle: "Görmeyi öğrenin, düşünmeyi hızlandırın."
         },
         menu: {
@@ -62,7 +62,7 @@ export const translations = {
     },
     en: {
         header: {
-            title: "Chess Vision",
+            title: "Chess Warmup",
             subtitle: "Learn to see, speed up thinking."
         },
         menu: {
