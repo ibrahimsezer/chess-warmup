@@ -1,4 +1,4 @@
-![Project Banner](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/banner.png)
+![Project Banner](https://github.com/ibrahimsezer/chess-warmup/blob/main/public/banner.png?raw=true)
 
 ## 📖 What is this?
 
