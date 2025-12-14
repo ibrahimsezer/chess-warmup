@@ -149,7 +149,7 @@ export default function ChessVisionTrainer() {
             <div className="mb-8 text-center relative w-full max-w-4xl flex flex-col items-center">
                 <button
                     onClick={toggleLanguage}
-                    className="absolute right-0 top-0 p-2 bg-white/5 hover:bg-aqua hover:text-black rounded-lg border border-white/10 transition-all duration-300 flex items-center gap-2 text-sm font-bold text-slate-300 hover:border-aqua"
+                    className={`p-3 bg-white/5 hover:bg-aqua hover:text-black rounded-lg border border-white/10 transition-all duration-300 items-center gap-2 text-sm font-bold text-slate-300 hover:border-aqua mb-4 md:mb-0 md:absolute md:right-8 md:top-0 ${gameState !== 'menu' ? 'hidden md:flex' : 'flex'}`}
                 >
                     <Globe className="w-4 h-4" />
                     {lang === 'tr' ? 'EN' : 'TR'}
