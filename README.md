@@ -1,16 +1,91 @@
-# React + Vite
+![Project Banner](public/banner.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📖 What is this?
 
-Currently, two official plugins are available:
+**Chess Warmup** is a specialized training tool designed to help chess players improve their board visualization skills. Unlike standard chess games, this application focuses on specific cognitive exercises that build the mental muscle required for calculation and blindfold chess.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It is built with **React**, **Vite**, and styled with **Tailwind CSS**.
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **🎨 Color Training**: Quickly identify whether a specific square (e.g., "e4") is light or dark.
+- **🎯 Coordinate Training**: Click on the correct square on the board given a coordinate.
+- **👁️ Blind Mode**: A challenging mode where pieces or coordinates are hidden, forcing you to rely on memory.
+- **🌍 Multi-language Support**: Fully localized in **English (EN)** and **Turkish (TR)**.
+- **⚡ Fast & Responsive**: Built for speed to act as a quick warm-up before serious games.
 
-## Expanding the ESLint configuration
+## 🚀 How to Use
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Installation
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/ibrahimsezer/chess-warmup.git
+    cd chess-warmup
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+
+    ```bash
+    npm run dev
+    ```
+
+### Game Modes
+
+| Mode | Description | Target Skill |
+| :--- | :--- | :--- |
+| **Color Guess** | You are given a coordinate (e.g., "a1") and must select if it's **Black** or **White**. | Board Geometry & Color Complex |
+| **Coordinate** | A coordinate appears on screen. Click the corresponding square on the board. | Board Geography |
+| **Blind Coordinate** | Same as Coordinate mode, but visual aids are removed. | Visualization & Memory |
+
+## 🏗️ Project Structure
+
+The application follows a simple component-based architecture:
+
+```bash
+src/
+├── App.jsx
+├── main.jsx
+├── assets/
+│   └── ...
+├── components/
+│   ├── ChessBoard.jsx
+│   ├── HUD.jsx
+│   └── ...
+├── hooks/
+│   └── useGameState.js
+├── screens/
+│   ├── GameScreen.jsx
+│   ├── GameOverScreen.jsx
+│   └── MenuScreen.jsx
+└── utils/
+    ├── chessLogic.js
+    └── translations.js
+
+```
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: React 19
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+
+---
+
+## 📸 Screenshots
+
+### Main Menu
+
+![Main Menu Placeholder](public/ss/menu_screen.png)
+
+### Gameplay
+
+![Gameplay Placeholder](public/ss/gameplay.png)
