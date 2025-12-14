@@ -1,10 +1,16 @@
-![Project Banner](public/banner.png)
+![Project Banner](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/banner.png)
 
 ## 📖 What is this?
 
 **Chess Warmup** is a specialized training tool designed to help chess players improve their board visualization skills. Unlike standard chess games, this application focuses on specific cognitive exercises that build the mental muscle required for calculation and blindfold chess.
 
-It is built with **React**, **Vite**, and styled with **Tailwind CSS**.
+### Screenshots
+
+![Main Menu Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/menu_screen.png)
+![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/gameplay.png)
+![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/coordinate_finder.png)
+![Gameplay Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/ghost_mode.png)
+![Game Over Placeholder](https://github.com/ibrahimsezer/chess-warmup/tree/main/public/screenshots/timesup.png)
 
 ## ✨ Features
 
@@ -17,6 +23,8 @@ It is built with **React**, **Vite**, and styled with **Tailwind CSS**.
 ## 🚀 How to Use
 
 ### Installation
+
+It is built with **React**, **Vite**, and styled with **Tailwind CSS**.
 
 1. Clone the repository:
 
@@ -79,13 +87,3 @@ src/
 - **Icons**: Lucide React
 
 ---
-
-## 📸 Screenshots
-
-### Main Menu
-
-![Main Menu Placeholder](public/ss/menu_screen.png)
-
-### Gameplay
-
-![Gameplay Placeholder](public/ss/gameplay.png)
