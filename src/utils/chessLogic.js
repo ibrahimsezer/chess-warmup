@@ -1,7 +1,8 @@
+import { translations } from './translations';
+
 export const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 export const RANKS = [1, 2, 3, 4, 5, 6, 7, 8];
 
-// Kare rengi hesaplama (a1=Siyah, h1=Beyaz mantığı)
 export const getSquareColor = (fileIndex, rank) => {
     const fileNum = fileIndex + 1;
     return (fileNum + rank) % 2 !== 0 ? 'white' : 'black';
@@ -13,11 +14,13 @@ export const getRandomSquare = () => {
     return { file: FILES[fileIdx], rank, fileIdx };
 };
 
-export const getModeName = (m) => {
+// Bu fonksiyonu dile göre çeviri yapacak şekilde güncelledik
+export const getModeName = (m, lang = 'tr') => {
+    const t = translations[lang].menu.modes;
     switch (m) {
-        case 'color': return 'Renk Hafızası';
-        case 'coordinate': return 'Koordinat';
-        case 'blind_coordinate': return 'Hayalet';
+        case 'color': return t.color.title;
+        case 'coordinate': return t.coordinate.title;
+        case 'blind_coordinate': return t.blind.title;
         default: return m;
     }
 };

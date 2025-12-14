@@ -3,9 +3,8 @@ import { Eye, EyeOff, Play, Grid3X3, Brain, History, BarChart2, MousePointer2 } 
 import ChessBoard from './ChessBoard';
 import { getModeName, FILES, RANKS } from '../utils/chessLogic';
 
-export default function MenuScreen({ onStartGame, history }) {
+export default function MenuScreen({ onStartGame, history, t, lang }) {
 
-    // Isı haritası verisini hesapla
     const calculateHeatmap = () => {
         const map = {};
         FILES.forEach(f => {
@@ -32,11 +31,11 @@ export default function MenuScreen({ onStartGame, history }) {
             {/* SOL KOLON: MOD SEÇİMİ */}
             <div className="bg-slate-800 p-6 md:p-8 rounded-2xl shadow-2xl border border-slate-700 w-full max-w-md text-center">
                 <div className="mb-2">
-                    <h2 className="text-2xl font-bold mb-4">Antrenman Modu</h2>
+                    <h2 className="text-2xl font-bold mb-4">{t.menu.title}</h2>
                     <div className="space-y-4">
                         <ModeButton
-                            title="Renk Hafızası"
-                            desc="e4 Beyaz mı Siyah mı?"
+                            title={t.menu.modes.color.title}
+                            desc={t.menu.modes.color.desc}
                             icon={<Grid3X3 className="w-6 h-6 text-indigo-200" />}
                             bg="bg-indigo-600"
                             hover="hover:bg-indigo-500"
@@ -46,8 +45,8 @@ export default function MenuScreen({ onStartGame, history }) {
                             onClick={() => onStartGame('color')}
                         />
                         <ModeButton
-                            title="Koordinat Bulucu"
-                            desc="Tahtada f7'ye tıkla!"
+                            title={t.menu.modes.coordinate.title}
+                            desc={t.menu.modes.coordinate.desc}
                             icon={<MousePointer2 className="w-6 h-6 text-emerald-200" />}
                             bg="bg-emerald-600"
                             hover="hover:bg-emerald-500"
@@ -57,8 +56,8 @@ export default function MenuScreen({ onStartGame, history }) {
                             onClick={() => onStartGame('coordinate')}
                         />
                         <ModeButton
-                            title="Hayalet Mod"
-                            desc="Sayılar gizli, içgüdülerini kullan."
+                            title={t.menu.modes.blind.title}
+                            desc={t.menu.modes.blind.desc}
                             icon={<EyeOff className="w-6 h-6 text-purple-200" />}
                             bg="bg-purple-600"
                             hover="hover:bg-purple-500"
@@ -79,14 +78,14 @@ export default function MenuScreen({ onStartGame, history }) {
                     <div className="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 w-full">
                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-slate-300">
                             <History className="w-5 h-5 text-amber-500" />
-                            Son Etkinlikler
+                            {t.menu.history}
                         </h3>
                         <div className="overflow-hidden rounded-lg border border-slate-700">
                             <table className="w-full text-sm text-left text-slate-400">
                                 <thead className="text-xs uppercase bg-slate-700 text-slate-300">
                                     <tr>
-                                        <th className="px-4 py-3">Mod</th>
-                                        <th className="px-4 py-3 text-center">Skor</th>
+                                        <th className="px-4 py-3">{t.menu.table.mode}</th>
+                                        <th className="px-4 py-3 text-center">{t.menu.table.score}</th>
                                         <th className="px-4 py-3 text-center text-emerald-400">✔</th>
                                         <th className="px-4 py-3 text-center text-red-400">✘</th>
                                     </tr>
@@ -94,7 +93,7 @@ export default function MenuScreen({ onStartGame, history }) {
                                 <tbody>
                                     {history.map((h) => (
                                         <tr key={h.id} className="border-b border-slate-700 hover:bg-slate-750">
-                                            <td className="px-4 py-2 font-medium text-white">{getModeName(h.mode)}</td>
+                                            <td className="px-4 py-2 font-medium text-white">{getModeName(h.mode, lang)}</td>
                                             <td className="px-4 py-2 text-center font-mono">{h.score}</td>
                                             <td className="px-4 py-2 text-center text-emerald-400">{h.correct}</td>
                                             <td className="px-4 py-2 text-center text-red-400">{h.wrong}</td>
@@ -109,14 +108,14 @@ export default function MenuScreen({ onStartGame, history }) {
                     <div className="bg-slate-800 p-6 rounded-2xl shadow-xl border border-slate-700 w-full flex flex-col items-center">
                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-slate-300 w-full">
                             <BarChart2 className="w-5 h-5 text-amber-500" />
-                            Performans Isı Haritası
+                            {t.menu.heatmap}
                         </h3>
                         <div className="flex flex-col items-center">
                             <ChessBoard isHeatmapMode={true} heatmapData={heatmapData} />
                             <div className="flex gap-4 mt-3 text-xs font-bold uppercase tracking-wider">
-                                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-red-600 rounded-sm"></div> Hata</div>
-                                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-slate-600 rounded-sm"></div> Nötr</div>
-                                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-emerald-500 rounded-sm"></div> Başarı</div>
+                                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-red-600 rounded-sm"></div> {t.menu.legend.error}</div>
+                                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-slate-600 rounded-sm"></div> {t.menu.legend.neutral}</div>
+                                <div className="flex items-center gap-1"><div className="w-3 h-3 bg-emerald-500 rounded-sm"></div> {t.menu.legend.success}</div>
                             </div>
                         </div>
                     </div>
@@ -126,7 +125,6 @@ export default function MenuScreen({ onStartGame, history }) {
     );
 }
 
-// Yardımcı Alt Bileşen: Buton
 function ModeButton({ title, desc, icon, bg, hover, iconBg, borderColor, overlayIcon, onClick, extraEffect }) {
     return (
         <button onClick={onClick} className={`w-full ${bg} ${hover} p-4 rounded-xl flex items-center justify-between transition-all group border ${borderColor} relative overflow-hidden`}>

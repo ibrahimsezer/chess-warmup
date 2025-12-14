@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Brain } from 'lucide-react';
+import { Brain, Globe } from 'lucide-react'; // Globe ikonu eklendi
 import { getRandomSquare, getSquareColor } from '../utils/chessLogic';
+import { translations } from '../utils/translations'; // Çeviriler eklendi
 
 import MenuScreen from './MenuScreen';
 import GameScreen from './GameScreen';
 import GameOverScreen from './GameOverScreen';
 
 export default function ChessVisionTrainer() {
-    const [gameState, setGameState] = useState('menu'); // menu, playing, gameover
+    const [gameState, setGameState] = useState('menu');
     const [mode, setMode] = useState('color');
     const [currentSquare, setCurrentSquare] = useState(null);
     const [score, setScore] = useState(0);
@@ -16,11 +17,15 @@ export default function ChessVisionTrainer() {
     const [streak, setStreak] = useState(0);
     const [orientation, setOrientation] = useState('white');
 
-    // İstatistik ve Geçmiş
+    // Dil State'i (Varsayılan Türkçe)
+    const [lang, setLang] = useState('tr');
+
+    // Aktif dilin çeviri objesi
+    const t = translations[lang];
+
     const [history, setHistory] = useState([]);
     const [currentSessionLog, setCurrentSessionLog] = useState([]);
 
-    // Referanslar
     const scoreRef = useRef(score);
     const logRef = useRef(currentSessionLog);
     const modeRef = useRef(mode);
@@ -71,7 +76,7 @@ export default function ChessVisionTrainer() {
             correct: correctCount,
             wrong: wrongCount,
             log: [...finalLog],
-            timestamp: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+            timestamp: new Date().toLocaleTimeString(lang === 'tr' ? 'tr-TR' : 'en-US', { hour: '2-digit', minute: '2-digit' })
         };
 
         setHistory(prev => [newActivity, ...prev].slice(0, 3));
@@ -87,6 +92,21 @@ export default function ChessVisionTrainer() {
         setGameState('playing');
         setFeedback(null);
         setCurrentSquare(getRandomSquare());
+    };
+
+    const handleQuitGame = () => {
+        clearInterval(timerRef.current);
+        setGameState('menu');
+    };
+
+    const handleSwitchMode = (newMode) => {
+        clearInterval(timerRef.current);
+        startGame(newMode);
+    };
+
+    // Dil Değiştirme Fonksiyonu
+    const toggleLanguage = () => {
+        setLang(prev => prev === 'tr' ? 'en' : 'tr');
     };
 
     const logAttempt = (result) => {
@@ -125,17 +145,26 @@ export default function ChessVisionTrainer() {
     return (
         <div className="min-h-screen bg-slate-900 text-white font-sans flex flex-col items-center justify-center p-4">
 
-            {/* Header */}
-            <div className="mb-6 text-center">
+            {/* Header & Language Toggle */}
+            <div className="mb-6 text-center relative w-full max-w-4xl flex flex-col items-center">
+                <button
+                    onClick={toggleLanguage}
+                    className="absolute right-0 top-0 p-2 bg-slate-800 hover:bg-slate-700 rounded-lg border border-slate-700 transition-colors flex items-center gap-2 text-sm font-bold text-slate-300"
+                >
+                    <Globe className="w-4 h-4" />
+                    {lang === 'tr' ? 'EN' : 'TR'}
+                </button>
+
                 <h1 className="text-3xl md:text-4xl font-bold text-amber-500 mb-2 flex items-center justify-center gap-2">
                     <Brain className="w-8 h-8 md:w-10 md:h-10" />
-                    Satranç Vizyonu
+                    {t.header.title}
                 </h1>
+                <p className="text-slate-400 text-sm">{t.header.subtitle}</p>
             </div>
 
-            {/* Screens */}
+            {/* Screens - t (translation) prop'u iletiliyor */}
             {gameState === 'menu' && (
-                <MenuScreen onStartGame={startGame} history={history} />
+                <MenuScreen onStartGame={startGame} history={history} t={t} lang={lang} />
             )}
 
             {gameState === 'playing' && (
@@ -150,6 +179,9 @@ export default function ChessVisionTrainer() {
                     onBoardClick={handleBoardClick}
                     orientation={orientation}
                     onToggleOrientation={() => setOrientation(p => p === 'white' ? 'black' : 'white')}
+                    onQuit={handleQuitGame}
+                    onSwitchMode={handleSwitchMode}
+                    t={t} // Çeviri objesi iletiliyor
                 />
             )}
 
@@ -159,6 +191,8 @@ export default function ChessVisionTrainer() {
                     mode={mode}
                     onMenu={() => setGameState('menu')}
                     onRestart={startGame}
+                    t={t} // Çeviri objesi iletiliyor
+                    lang={lang}
                 />
             )}
         </div>
