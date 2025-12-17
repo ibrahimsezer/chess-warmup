@@ -1,32 +1,12 @@
 import React from 'react';
-import { Eye, EyeOff, Play, Grid3X3, Brain, History, BarChart2, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing } from 'lucide-react';
-import ChessBoard from './ChessBoard';
+import HistoryDashboard from './HistoryDashboard';
+import { Eye, EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing } from 'lucide-react';
 import { getModeName, FILES, RANKS } from '../utils/chessLogic';
 import OpeningExplorer from './OpeningExplorer';
 
 export default function MenuScreen({ onStartGame, history, t, lang }) {
 
-    const calculateHeatmap = () => {
-        // ... (existing logic)
-        const map = {};
-        FILES.forEach(f => {
-            RANKS.forEach(r => {
-                map[`${f}${r}`] = { correct: 0, wrong: 0 };
-            });
-        });
 
-        history.forEach(session => {
-            session.log.forEach(entry => {
-                if (map[entry.square]) {
-                    if (entry.result === 'correct') map[entry.square].correct++;
-                    else map[entry.square].wrong++;
-                }
-            });
-        });
-        return map;
-    };
-
-    const heatmapData = history.length > 0 ? calculateHeatmap() : null;
 
     return (
         <div className="flex flex-col gap-8 max-w-6xl w-full lg:flex-row items-start justify-center">
@@ -92,73 +72,15 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            {/* RIGHT COLUMN: HISTORY & HEATMAP & EXPLORER */}
-            <div className="flex flex-col gap-6 w-full max-w-md">
-
-                {/* Always show Explorer if History is empty, or below it? Let's clarify:
-                 The user just said create it component. To show it prominently, let's put it on the right.
-                 If history exists, show history. If not, showing Explorer is nice. 
-                 Actually, let's stack them or make layout responsive.
-                 I'll put it in the right column always.
-                */}
-
-                {history.length > 0 && (
-                    <>
-                        {/* HISTORY TABLE */}
-                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/10 w-full relative overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent pointer-events-none" />
-                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white relative z-10">
-                                <History className="w-5 h-5 text-aqua" />
-                                {t.menu.history}
-                            </h3>
-                            <div className="overflow-hidden rounded-xl border border-white/5 relative z-10">
-                                <table className="w-full text-sm text-left text-slate-300">
-                                    <thead className="text-xs uppercase bg-black/40 text-slate-400 font-bold tracking-wider">
-                                        <tr>
-                                            <th className="px-4 py-3">{t.menu.table.mode}</th>
-                                            <th className="px-4 py-3 text-center">{t.menu.table.score}</th>
-                                            <th className="px-4 py-3 text-center text-aqua">✔</th>
-                                            <th className="px-4 py-3 text-center text-red-400">✘</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {history.map((h) => (
-                                            <tr key={h.id} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                                                <td className="px-4 py-3 font-medium text-white">{getModeName(h.mode, lang)}</td>
-                                                <td className="px-4 py-3 text-center font-mono font-bold">{h.score}</td>
-                                                <td className="px-4 py-3 text-center text-aqua font-bold">{h.correct}</td>
-                                                <td className="px-4 py-3 text-center text-red-400 font-bold">{h.wrong}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        {/* HEATMAP */}
-                        <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/10 w-full flex flex-col items-center">
-                            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-white w-full">
-                                <BarChart2 className="w-5 h-5 text-aqua" />
-                                {t.menu.heatmap}
-                            </h3>
-                            <div className="flex flex-col items-center">
-                                <ChessBoard isHeatmapMode={true} heatmapData={heatmapData} />
-                                <div className="flex gap-4 mt-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 bg-red-500 rounded-full shadow-[0_0_8px_rgba(239,68,68,0.5)]"></div> {t.menu.legend.error}</div>
-                                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 bg-slate-700 rounded-full"></div> {t.menu.legend.neutral}</div>
-                                    <div className="flex items-center gap-1.5"><div className="w-2 h-2 bg-aqua rounded-full shadow-[0_0_8px_rgba(0,210,168,0.5)]"></div> {t.menu.legend.success}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                )}
 
                 {/* NEW OPENING EXPLORER COMPONENT */}
-                <OpeningExplorer />
+                <OpeningExplorer lang={lang} />
             </div>
+
+            {/* RIGHT COLUMN: HISTORY & HEATMAP */}
+            <HistoryDashboard history={history} t={t} lang={lang} />
         </div>
+
     );
 }
 
