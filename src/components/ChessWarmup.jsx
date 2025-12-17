@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Brain, Globe } from 'lucide-react'; // Globe ikonu eklendi
+import { Globe } from 'lucide-react'; // Globe ikonu eklendi
 import { getRandomSquare, getSquareColor, generateMovePuzzle } from '../utils/chessLogic';
 import { translations } from '../utils/translations'; // Çeviriler eklendi
 
@@ -188,10 +188,9 @@ export default function ChessVisionTrainer() {
                     {lang === 'tr' ? 'EN' : 'TR'}
                 </button>
 
-                <h1 className="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-aqua to-emerald-400 mb-2 flex items-center justify-center gap-3 drop-shadow-lg">
-                    <Brain className="w-10 h-10 md:w-12 md:h-12 text-aqua" />
-                    {t.header.title}
-                </h1>
+                <div className="mb-4 flex items-center justify-center">
+                    <img src="/banner.png" alt="Chess Warmup" className="h-16 md:h-36 w-auto object-contain drop-shadow-lg" />
+                </div>
                 <p className="text-slate-400 text-sm md:text-base tracking-widest uppercase font-medium">{t.header.subtitle}</p>
             </div>
 
