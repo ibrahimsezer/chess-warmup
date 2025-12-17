@@ -1,5 +1,15 @@
 import React from 'react';
 import { FILES, RANKS, getSquareColor } from '../utils/chessLogic';
+import { Castle, ChessKnight, ChessBishop, ChessKing, Crown } from 'lucide-react';
+
+// Mapping piece types to Icons
+const PIECE_ICONS = {
+    'R': Castle,
+    'N': ChessKnight,
+    'B': ChessBishop,
+    'K': ChessKing,
+    'Q': Crown // Using Crown for Queen as Lucide typically doesn't have ChessQueen, or use Crown as fallback
+};
 
 export default function ChessBoard({
     mode,
@@ -8,7 +18,8 @@ export default function ChessBoard({
     feedback,
     onSquareClick,
     isHeatmapMode = false,
-    heatmapData = null
+    heatmapData = null,
+    pieces = {} // Format: { "a1": { type: 'R', color: 'white' } }
 }) {
     const renderRanks = orientation === 'white' ? [8, 7, 6, 5, 4, 3, 2, 1] : [1, 2, 3, 4, 5, 6, 7, 8];
     const renderFiles = orientation === 'white' ? FILES : [...FILES].reverse();
@@ -26,11 +37,39 @@ export default function ChessBoard({
                     let content = null;
                     let heatmapBorderClass = '';
 
+                    // Check for piece
+                    const piece = pieces[squareId];
+
                     if (!isHeatmapMode) {
                         // Game Mode
                         const isTarget = currentSquare && currentSquare.fileIdx === originalFileIdx && currentSquare.rank === rank;
+
+                        // Default feedback styling
                         if (feedback === 'wrong' && isTarget) cellClass = 'bg-red-500 animate-pulse';
                         if (feedback === 'correct' && isTarget) cellClass = 'bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)] z-10';
+
+                        // Piece Rendering
+                        if (piece) {
+                            const PieceIcon = PIECE_ICONS[piece.type];
+                            // Style for piece: White piece usually has white fill/stroke, but on slate background distinctness is key.
+                            // We use text-white/black but add drop shadow.
+                            // Actually white pieces on light squares (slate-300) need contrast.
+                            // Black pieces on dark squares (slate-600) need contrast.
+
+                            // Let's make "White" pieces very bright white with stroke, "Black" pieces dark slate/black.
+                            const pieceColorClass = piece.color === 'white'
+                                ? 'text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] fill-white/20'
+                                : 'text-slate-900 drop-shadow-[0_1px_1px_rgba(255,255,255,0.2)] fill-slate-900/50';
+
+                            if (PieceIcon) {
+                                content = (
+                                    <div className={`absolute inset-0 flex items-center justify-center pointer-events-none z-10 ${pieceColorClass}`}>
+                                        <PieceIcon className="w-4/5 h-4/5" strokeWidth={1.5} />
+                                    </div>
+                                );
+                            }
+                        }
+
                     } else {
                         // Heatmap Mode
                         const data = heatmapData ? heatmapData[squareId] : { correct: 0, wrong: 0 };
@@ -83,7 +122,11 @@ export default function ChessBoard({
                             onClick={() => !isHeatmapMode && onSquareClick(originalFileIdx, rank)}
                             className={`flex items-center justify-center relative ${isHeatmapMode ? 'w-6 h-6 md:w-8 md:h-8 text-[8px]' : 'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 cursor-pointer hover:opacity-90'} transition-colors ${!isHeatmapMode && cellClass} ${heatmapBorderClass} ${isHeatmapMode && cellClass}`}
                         >
-                            {isHeatmapMode && content}
+                            {/* Render Piece or Heatmap Content */}
+                            {content}
+                            {/* Note: In heatmap mode 'content' is the overlay. In game mode 'content' is the piece. */}
+                            {/* Wait, if I use content variable for piece, I overwrite heatmap content logic? No, separated by if/else. */}
+                            {/* Double check: In heatmap mode, content is <div overlay>. In game mode, content is Piece. Correct. */}
 
                             {!isHeatmapMode && colIndex === 0 && (
                                 <span className={`${rankLabelClass} ${!isRankLabelVisible && 'opacity-0'}`}>

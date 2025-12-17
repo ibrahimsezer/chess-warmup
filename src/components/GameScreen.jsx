@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUpDown, XCircle, Grid3X3, MousePointer2, EyeOff } from 'lucide-react';
+import { ArrowUpDown, XCircle, Grid3X3, MousePointer2, EyeOff, Castle } from 'lucide-react';
 import ChessBoard from './ChessBoard';
+import PieceMoveGame from './PieceMoveGame';
 import { getSquareColor } from '../utils/chessLogic';
 
 export default function GameScreen({
@@ -23,7 +24,7 @@ export default function GameScreen({
 
     // EFFECT: Triggers the flash whenever the target square changes
     useEffect(() => {
-        if (currentSquare && (mode === 'coordinate' || mode === 'blind_coordinate')) {
+        if (currentSquare && (mode === 'coordinate' || mode === 'blind_coordinate' || mode === 'piece_move')) {
             setShowFlash(true);
             const timer = setTimeout(() => {
                 setShowFlash(false);
@@ -31,6 +32,12 @@ export default function GameScreen({
             return () => clearTimeout(timer);
         }
     }, [currentSquare, mode]);
+
+    const getTargetText = () => {
+        if (!currentSquare) return '?';
+        if (mode === 'piece_move' && currentSquare.notation) return currentSquare.notation;
+        return currentSquare.file ? `${currentSquare.file}${currentSquare.rank}` : '?';
+    };
 
     return (
         <div className="flex flex-col items-center w-full max-w-lg">
@@ -47,7 +54,7 @@ export default function GameScreen({
                     <div className="flex flex-col items-center">
                         <span className="text-slate-400 text-[10px] uppercase tracking-wider">{t.game.target}</span>
                         <span className={`text-4xl font-black ${feedback === 'wrong' ? 'text-red-500 shake' : 'text-white'}`}>
-                            {currentSquare ? `${currentSquare.file}${currentSquare.rank}` : '?'}
+                            {getTargetText()}
                         </span>
                     </div>
 
@@ -90,25 +97,34 @@ export default function GameScreen({
                     </div>
                 )}
 
-                {/* MODE: COORDINATE & BLIND COORDINATE */}
-                {(mode === 'coordinate' || mode === 'blind_coordinate') && (
+                {/* MODE: COORDINATE & BLIND COORDINATE & PIECE MOVE */}
+                {(mode === 'coordinate' || mode === 'blind_coordinate' || mode === 'piece_move') && (
                     <div className="flex flex-col items-center gap-4 relative">
                         {/* FLASH MESSAGE OVERLAY */}
                         {showFlash && currentSquare && (
                             <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none animate-ping-short">
                                 <div className="text-6xl md:text-8xl font-black text-amber-400 drop-shadow-[0_0_15px_rgba(0,0,0,0.8)] scale-150 opacity-80">
-                                    {currentSquare.file}{currentSquare.rank}
+                                    {getTargetText()}
                                 </div>
                             </div>
                         )}
 
-                        <ChessBoard
-                            mode={mode}
-                            orientation={orientation}
-                            currentSquare={currentSquare}
-                            feedback={feedback}
-                            onSquareClick={onBoardClick}
-                        />
+                        {mode === 'piece_move' ? (
+                            <PieceMoveGame
+                                currentPuzzle={currentSquare}
+                                feedback={feedback}
+                                onSquareClick={onBoardClick}
+                                orientation={orientation}
+                            />
+                        ) : (
+                            <ChessBoard
+                                mode={mode}
+                                orientation={orientation}
+                                currentSquare={currentSquare}
+                                feedback={feedback}
+                                onSquareClick={onBoardClick}
+                            />
+                        )}
 
                         <div className="flex items-center gap-2 mt-2">
                             {mode === 'blind_coordinate' && (
@@ -145,7 +161,7 @@ export default function GameScreen({
             </div>
 
             {/* Quick Actions Bar */}
-            <div className="w-full grid grid-cols-4 gap-2">
+            <div className="w-full grid grid-cols-5 gap-2">
                 <button
                     onClick={onQuit}
                     className="flex flex-col items-center justify-center p-3 rounded-xl bg-red-900/30 text-red-400 hover:bg-red-900/50 border border-red-900/50 transition-colors group"
@@ -169,6 +185,14 @@ export default function GameScreen({
                 >
                     <MousePointer2 className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
                     <span className="text-[10px] font-bold uppercase">{t.game.controls.coord}</span>
+                </button>
+
+                <button
+                    onClick={() => onSwitchMode('piece_move')}
+                    className={`flex flex-col items-center justify-center p-3 rounded-xl border transition-colors group ${mode === 'piece_move' ? 'bg-amber-600 text-white border-amber-500' : 'bg-slate-800 text-slate-400 hover:bg-slate-700 border-slate-700'}`}
+                >
+                    <Castle className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
+                    <span className="text-[10px] font-bold uppercase">{t.game.controls.moves}</span>
                 </button>
 
                 <button

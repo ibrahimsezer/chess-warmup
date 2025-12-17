@@ -61,6 +61,19 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
                             extraEffect
                         />
                         <ModeButton
+                            title={t.menu.modes.piece_move.title}
+                            desc={t.menu.modes.piece_move.desc}
+                            icon={<Castle className="w-6 h-6 text-aqua" />}
+                            bg="bg-black/40"
+                            hover="hover:bg-black hover:text-white"
+                            iconBg="bg-white/10"
+                            borderColor="border-aqua/50"
+                            overlayIcon={<Castle className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
+                            onClick={() => onStartGame('piece_move')}
+                            accentColor="text-aqua"
+                            extraEffect
+                        />
+                        <ModeButton
                             title={t.menu.modes.blind.title}
                             desc={t.menu.modes.blind.desc}
                             icon={<EyeOff className="w-6 h-6 text-aqua" />} // Inverse style

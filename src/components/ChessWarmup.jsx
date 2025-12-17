@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Brain, Globe } from 'lucide-react'; // Globe ikonu eklendi
-import { getRandomSquare, getSquareColor } from '../utils/chessLogic';
+import { getRandomSquare, getSquareColor, generateMovePuzzle } from '../utils/chessLogic';
 import { translations } from '../utils/translations'; // Çeviriler eklendi
 
 import MenuScreen from './MenuScreen';
@@ -56,7 +56,11 @@ export default function ChessVisionTrainer() {
 
     const nextTurn = () => {
         setFeedback(null);
-        setCurrentSquare(getRandomSquare());
+        if (mode === 'piece_move') {
+            setCurrentSquare(generateMovePuzzle());
+        } else {
+            setCurrentSquare(getRandomSquare());
+        }
     };
 
     const endGame = () => {
@@ -91,7 +95,13 @@ export default function ChessVisionTrainer() {
         setCurrentSessionLog([]);
         setGameState('playing');
         setFeedback(null);
-        setCurrentSquare(getRandomSquare());
+
+        // Initial Square Generation based on mode
+        if (selectedMode === 'piece_move') {
+            setCurrentSquare(generateMovePuzzle());
+        } else {
+            setCurrentSquare(getRandomSquare());
+        }
     };
 
     const handleQuitGame = () => {
@@ -111,8 +121,15 @@ export default function ChessVisionTrainer() {
 
     const logAttempt = (result) => {
         if (!currentSquare) return;
-        const squareId = `${currentSquare.file}${currentSquare.rank}`;
-        setCurrentSessionLog(prev => [...prev, { square: squareId, result, fileIdx: currentSquare.fileIdx, rank: currentSquare.rank }]);
+
+        let target = currentSquare;
+        // Adjust if we are in piece_move mode (nested target)
+        if (mode === 'piece_move' && currentSquare.target) {
+            target = currentSquare.target;
+        }
+
+        const squareId = `${target.file}${target.rank}`;
+        setCurrentSessionLog(prev => [...prev, { square: squareId, result, fileIdx: target.fileIdx, rank: target.rank }]);
     };
 
     const handleColorGuess = (color) => {
@@ -122,8 +139,24 @@ export default function ChessVisionTrainer() {
     };
 
     const handleBoardClick = (fileIdx, rank) => {
-        if (gameState !== 'playing' || (mode !== 'coordinate' && mode !== 'blind_coordinate')) return;
-        if (fileIdx === currentSquare.fileIdx && rank === currentSquare.rank) handleCorrect();
+        if (gameState !== 'playing') return;
+
+        // Allowed modes
+        if (mode !== 'coordinate' && mode !== 'blind_coordinate' && mode !== 'piece_move') return;
+
+        let isCorrect = false;
+
+        if (mode === 'piece_move') {
+            if (currentSquare && currentSquare.target && fileIdx === currentSquare.target.fileIdx && rank === currentSquare.target.rank) {
+                isCorrect = true;
+            }
+        } else {
+            if (fileIdx === currentSquare.fileIdx && rank === currentSquare.rank) {
+                isCorrect = true;
+            }
+        }
+
+        if (isCorrect) handleCorrect();
         else handleWrong();
     };
 

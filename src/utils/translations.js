@@ -15,6 +15,10 @@ export const translations = {
                     title: "Koordinat Bulucu",
                     desc: "Tahtada f7'ye tıkla!"
                 },
+                piece_move: {
+                    title: "Taş Hareketi",
+                    desc: "Kale ile a8'e git!"
+                },
                 blind: {
                     title: "Hayalet Mod",
                     desc: "Sayılar gizli, içgüdülerini kullan."
@@ -48,6 +52,7 @@ export const translations = {
                 quit: "ÇIKIŞ",
                 color: "RENK",
                 coord: "KOORD",
+                moves: "HAMLE",
                 blind: "HAYALET"
             },
             blindActive: "Hayalet Mod Aktif",
@@ -75,6 +80,10 @@ export const translations = {
                 coordinate: {
                     title: "Coordinate Finder",
                     desc: "Click f7 on the board!"
+                },
+                piece_move: {
+                    title: "Piece Movement",
+                    desc: "Move Rook to a8!"
                 },
                 blind: {
                     title: "Ghost Mode",
@@ -109,6 +118,7 @@ export const translations = {
                 quit: "QUIT",
                 color: "COLOR",
                 coord: "COORD",
+                moves: "MOVES",
                 blind: "GHOST"
             },
             blindActive: "Ghost Mode Active",
