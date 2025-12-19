@@ -4,6 +4,7 @@ import { Eye, EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, 
 import { getModeName, FILES, RANKS } from '../utils/chessLogic';
 import OpeningExplorer from './OpeningExplorer';
 import LatestNews from './LatestNews';
+import PieceGuide from './PieceGuide';
 
 export default function MenuScreen({ onStartGame, history, t, lang }) {
 
@@ -82,6 +83,9 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
                 {/* RIGHT COLUMN: HISTORY & HEATMAP */}
                 <HistoryDashboard history={history} t={t} lang={lang} />
             </div>
+
+            {/* PIECE GUIDE */}
+            <PieceGuide lang={lang} />
 
             {/* LATEST NEWS */}
             <LatestNews lang={lang} />
