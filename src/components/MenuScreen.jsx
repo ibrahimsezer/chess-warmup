@@ -3,82 +3,88 @@ import HistoryDashboard from './HistoryDashboard';
 import { Eye, EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing } from 'lucide-react';
 import { getModeName, FILES, RANKS } from '../utils/chessLogic';
 import OpeningExplorer from './OpeningExplorer';
+import LatestNews from './LatestNews';
 
 export default function MenuScreen({ onStartGame, history, t, lang }) {
 
 
 
     return (
-        <div className="flex flex-col gap-8 max-w-6xl w-full lg:flex-row items-start justify-center">
-            {/* LEFT COLUMN: MODE SELECTION */}
-            <div className="flex flex-col gap-8 w-full max-w-md">
-                <div className="bg-white/5 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/10 w-full text-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-gradient-to-br from-aqua/5 to-transparent pointer-events-none" />
-                    <div className="mb-2 relative z-10">
-                        <h2 className="text-3xl font-black mb-6 text-white tracking-tight">{t.menu.title}</h2>
-                        <div className="space-y-4">
-                            <ModeButton
-                                title={t.menu.modes.color.title}
-                                desc={t.menu.modes.color.desc}
-                                icon={<Grid3X3 className="w-6 h-6 text-aqua" />} // Icon black on Aqua
-                                bg="bg-black/40"
-                                hover="hover:bg-black hover:text-white"
-                                iconBg="bg-white/10"
-                                borderColor="border-aqua/50"
-                                overlayIcon={<ChessKnight className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
-                                onClick={() => onStartGame('color')}
-                                accentColor="text-aqua"
-                                extraEffect
-                            />
-                            <ModeButton
-                                title={t.menu.modes.coordinate.title}
-                                desc={t.menu.modes.coordinate.desc}
-                                icon={<MousePointer2 className="w-6 h-6 text-aqua" />}
-                                bg="bg-black/40"
-                                hover="hover:bg-black hover:text-white"
-                                iconBg="bg-white/10"
-                                borderColor="border-aqua/50"
-                                overlayIcon={<ChessBishop className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
-                                onClick={() => onStartGame('coordinate')}
-                                accentColor="text-aqua"
-                                extraEffect
-                            />
-                            <ModeButton
-                                title={t.menu.modes.piece_move.title}
-                                desc={t.menu.modes.piece_move.desc}
-                                icon={<Castle className="w-6 h-6 text-aqua" />}
-                                bg="bg-black/40"
-                                hover="hover:bg-black hover:text-white"
-                                iconBg="bg-white/10"
-                                borderColor="border-aqua/50"
-                                overlayIcon={<Castle className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
-                                onClick={() => onStartGame('piece_move')}
-                                accentColor="text-aqua"
-                                extraEffect
-                            />
-                            <ModeButton
-                                title={t.menu.modes.blind.title}
-                                desc={t.menu.modes.blind.desc}
-                                icon={<EyeOff className="w-6 h-6 text-aqua" />} // Inverse style
-                                bg="bg-black/40"
-                                hover="hover:bg-black hover:text-white"
-                                iconBg="bg-white/10"
-                                borderColor="border-aqua/50"
-                                overlayIcon={<ChessKing className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
-                                onClick={() => onStartGame('blind_coordinate')}
-                                accentColor="text-aqua"
-                                extraEffect
-                            />
+        <div className="flex flex-col gap-12 w-full max-w-6xl items-center">
+            <div className="flex flex-col gap-8 w-full lg:flex-row items-start justify-center">
+                {/* LEFT COLUMN: MODE SELECTION */}
+                <div className="flex flex-col gap-8 w-full max-w-md">
+                    <div className="bg-white/5 backdrop-blur-xl p-8 rounded-3xl shadow-2xl border border-white/10 w-full text-center relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-aqua/5 to-transparent pointer-events-none" />
+                        <div className="mb-2 relative z-10">
+                            <h2 className="text-3xl font-black mb-6 text-white tracking-tight">{t.menu.title}</h2>
+                            <div className="space-y-4">
+                                <ModeButton
+                                    title={t.menu.modes.color.title}
+                                    desc={t.menu.modes.color.desc}
+                                    icon={<Grid3X3 className="w-6 h-6 text-aqua" />} // Icon black on Aqua
+                                    bg="bg-black/40"
+                                    hover="hover:bg-black hover:text-white"
+                                    iconBg="bg-white/10"
+                                    borderColor="border-aqua/50"
+                                    overlayIcon={<ChessKnight className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
+                                    onClick={() => onStartGame('color')}
+                                    accentColor="text-aqua"
+                                    extraEffect
+                                />
+                                <ModeButton
+                                    title={t.menu.modes.coordinate.title}
+                                    desc={t.menu.modes.coordinate.desc}
+                                    icon={<MousePointer2 className="w-6 h-6 text-aqua" />}
+                                    bg="bg-black/40"
+                                    hover="hover:bg-black hover:text-white"
+                                    iconBg="bg-white/10"
+                                    borderColor="border-aqua/50"
+                                    overlayIcon={<ChessBishop className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
+                                    onClick={() => onStartGame('coordinate')}
+                                    accentColor="text-aqua"
+                                    extraEffect
+                                />
+                                <ModeButton
+                                    title={t.menu.modes.piece_move.title}
+                                    desc={t.menu.modes.piece_move.desc}
+                                    icon={<Castle className="w-6 h-6 text-aqua" />}
+                                    bg="bg-black/40"
+                                    hover="hover:bg-black hover:text-white"
+                                    iconBg="bg-white/10"
+                                    borderColor="border-aqua/50"
+                                    overlayIcon={<Castle className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
+                                    onClick={() => onStartGame('piece_move')}
+                                    accentColor="text-aqua"
+                                    extraEffect
+                                />
+                                <ModeButton
+                                    title={t.menu.modes.blind.title}
+                                    desc={t.menu.modes.blind.desc}
+                                    icon={<EyeOff className="w-6 h-6 text-aqua" />} // Inverse style
+                                    bg="bg-black/40"
+                                    hover="hover:bg-black hover:text-white"
+                                    iconBg="bg-white/10"
+                                    borderColor="border-aqua/50"
+                                    overlayIcon={<ChessKing className="w-16 h-16 text-aqua/25 absolute rotate-12" />}
+                                    onClick={() => onStartGame('blind_coordinate')}
+                                    accentColor="text-aqua"
+                                    extraEffect
+                                />
+                            </div>
                         </div>
                     </div>
+
+                    {/* NEW OPENING EXPLORER COMPONENT */}
+                    <OpeningExplorer lang={lang} />
                 </div>
 
-                {/* NEW OPENING EXPLORER COMPONENT */}
-                <OpeningExplorer lang={lang} />
+                {/* RIGHT COLUMN: HISTORY & HEATMAP */}
+                <HistoryDashboard history={history} t={t} lang={lang} />
             </div>
 
-            {/* RIGHT COLUMN: HISTORY & HEATMAP */}
-            <HistoryDashboard history={history} t={t} lang={lang} />
+            {/* LATEST NEWS */}
+            <LatestNews lang={lang} />
         </div>
 
     );
