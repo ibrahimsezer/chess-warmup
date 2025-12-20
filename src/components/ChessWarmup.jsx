@@ -6,6 +6,7 @@ import { translations } from '../utils/translations'; // Çeviriler eklendi
 import MenuScreen from './MenuScreen';
 import GameScreen from './GameScreen';
 import GameOverScreen from './GameOverScreen';
+import Footer from './Footer';
 
 export default function ChessVisionTrainer() {
     const [gameState, setGameState] = useState('menu');
@@ -227,6 +228,7 @@ export default function ChessVisionTrainer() {
                     lang={lang}
                 />
             )}
+            <Footer />
         </div>
     );
 }
