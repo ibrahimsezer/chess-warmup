@@ -100,6 +100,92 @@ export const latestNews = [
         },
         sourceName: "Chess.com",
         sourceLink: "https://www.chess.com/events/2025-xtx-markets-london-chess-classic-elite/results"
+    },
+    {
+        id: 7,
+        date: {
+            tr: "8 Aralık 2025",
+            en: "December 8, 2025"
+        },
+        title: {
+            tr: "Praggnanandhaa 2025 FIDE Circuit Şampiyonu Olarak Adaylar'a Gidiyor",
+            en: "Praggnanandhaa Wins FIDE Circuit 2025, Qualifies for Candidates"
+        },
+        content: {
+            tr: "Hintli yıldız R. Praggnanandhaa, 2025 FIDE Circuit yarışını zirvede tamamlayarak 2026 Adaylar Turnuvası'na katılma hakkı kazandı. Londra Satranç Klasiği'nin Açık kategorisinde aldığı kritik puanlarla liderliğini koruyan Praggnanandhaa, en yakın takipçisi Nodirbek Abdusattorov'un Elite kategorisindeki inanılmaz performansına rağmen zirveyi bırakmadı.",
+            en: "Indian star R. Praggnanandhaa has won the 2025 FIDE Circuit, securing his spot in the 2026 Candidates Tournament. By scoring critical points in the London Chess Classic Open, he maintained his lead despite a historic performance by his closest rival, Nodirbek Abdusattorov, in the Elite section."
+        },
+        sourceName: "FIDE",
+        sourceLink: "https://www.fide.com/praggnanandhaa-wins-fide-circuit-2025/"
+    },
+    {
+        id: 8,
+        date: {
+            tr: "19 Aralık 2025",
+            en: "December 19, 2025"
+        },
+        title: {
+            tr: "Dünya Hızlı ve Yıldırım Şampiyonası Katar'da Başlıyor",
+            en: "World Rapid and Blitz Championship Kicks Off in Qatar"
+        },
+        content: {
+            tr: "FIDE Dünya Hızlı ve Yıldırım Satranç Şampiyonası, 25-30 Aralık 2025 tarihleri arasında Katar'ın başkenti Doha'da düzenlenecek. 1 milyon Euro'nun üzerinde ödül havuzuna sahip turnuvada, Dünya Şampiyonu Gukesh D ve Magnus Carlsen'in yanı sıra 250'den fazla elit sporcu mücadele edecek.",
+            en: "The FIDE World Rapid and Blitz Chess Championships are set to take place in Doha, Qatar, from December 25 to 30, 2025. With a prize fund exceeding €1 million, the event will feature World Champion Gukesh D and Magnus Carlsen among over 250 elite players."
+        },
+        sourceName: "Chessdom",
+        sourceLink: "https://www.chessdom.com/fide-world-rapid-blitz-championships-2025/"
+    },
+    {
+        id: 9,
+        date: {
+            tr: "1 Aralık 2025",
+            en: "December 1, 2025"
+        },
+        title: {
+            tr: "Avrupa'nın En İyileri Belli Oldu: Van Foreest ve Pultinevicius Zirvede",
+            en: "Europe's Best Crowned: Van Foreest and Pultinevicius on Top"
+        },
+        content: {
+            tr: "Kosovo'nun Priştine kentinde düzenlenen 2025 Avrupa Hızlı ve Yıldırım Satranç Şampiyonası tamamlandı. Hızlı satranç (Rapid) kategorisinde Litvanyalı GM Paulius Pultinevicius şampiyon olurken, Yıldırım (Blitz) kategorisinde Hollandalı GM Jorden Van Foreest altın madalyayı kazanan isim oldu.",
+            en: "The 2025 European Rapid & Blitz Chess Championships concluded in Pristina, Kosovo. GM Paulius Pultinevicius from Lithuania won the Rapid title, while Dutch GM Jorden Van Foreest claimed the gold medal in the Blitz category."
+        },
+        sourceName: "European Chess Union",
+        sourceLink: "https://www.europechess.org/european-rapid-blitz-chess-champions-2025-crowned-in-kosovo/"
+    },
+    {
+        id: 10,
+        date: {
+            tr: "14 Aralık 2025",
+            en: "December 14, 2025"
+        },
+        title: {
+            tr: "Arjun Erigaisi Global Chess League Sahnesine Geri Dönüyor",
+            en: "Arjun Erigaisi Returns to the Global Chess League Stage"
+        },
+        content: {
+            tr: "Dünya Kupası'nda yaşadığı hayal kırıklığının ardından Arjun Erigaisi, Global Chess League'in (GCL) üçüncü sezonu için geri döndü. Genç yıldız, PBG Alaskan Knights takımı adına Dünya Şampiyonu Gukesh ve Kateryna Lagno ile birlikte hamle yapacak.",
+            en: "Following a heartbreaking exit at the World Cup, Arjun Erigaisi has returned for the third season of the Global Chess League (GCL). The young star will play for the PBG Alaskan Knights alongside World Champion Gukesh and Kateryna Lagno."
+        },
+        sourceName: "Times of India",
+        sourceLink: "https://timesofindia.indiatimes.com/sports/chess/fide-world-cup-twice-denied-arjun-erigaisi-happy-to-be-in-thick-of-action/articleshow/125957718.cms"
+    },
+    {
+        id: 11,
+        date: {
+            tr: "2 Aralık 2025",
+            en: "December 2, 2025"
+        },
+        title: {
+            tr: "Londra Satranç Klasiği'nde Abdusattorov Rüzgarı",
+            en: "Abdusattorov Storm at London Chess Classic"
+        },
+        content: {
+            tr: "Nodirbek Abdusattorov, Londra Satranç Klasiği Elite kategorisinde satranç tarihinin en yüksek Turnuva Performans Reytinglerinden (TPR) birine imza attı. Özbek büyükusta bu performansıyla 19.62 FIDE Circuit puanı toplasa da, genel sıralamada Praggnanandhaa'yı geçmeye yetmedi.",
+            en: "Nodirbek Abdusattorov achieved one of the highest Tournament Performance Ratings (TPR) in chess history at the London Chess Classic Elite. Although the Uzbek grandmaster earned 19.62 FIDE Circuit points with this performance, it was not enough to overtake Praggnanandhaa in the overall standings."
+        },
+        sourceName: "FIDE",
+        sourceLink: "https://www.fide.com/praggnanandhaa-wins-fide-circuit-2025/"
     }
+
 
 ];
