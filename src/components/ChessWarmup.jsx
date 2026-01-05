@@ -43,17 +43,17 @@ export default function ChessVisionTrainer() {
             if (!currentSquare) nextTurn();
 
             timerRef.current = setInterval(() => {
-                setTimeLeft((prev) => {
-                    if (prev <= 1) {
-                        endGame();
-                        return 0;
-                    }
-                    return prev - 1;
-                });
+                setTimeLeft((prev) => Math.max(0, prev - 1));
             }, 1000);
         }
         return () => clearInterval(timerRef.current);
     }, [gameState, mode]);
+
+    useEffect(() => {
+        if (timeLeft === 0 && gameState === 'playing') {
+            endGame();
+        }
+    }, [timeLeft, gameState]);
 
     const nextTurn = () => {
         setFeedback(null);
