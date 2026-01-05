@@ -37,6 +37,7 @@ export const translations = {
                 success: "Başarı"
             }
         },
+        downloadReport: "Rapor İndir",
         game: {
             score: "SKOR",
             target: "HEDEF",
@@ -103,6 +104,7 @@ export const translations = {
                 success: "Success"
             }
         },
+        downloadReport: "Download Report",
         game: {
             score: "SCORE",
             target: "TARGET",

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
 import HistoryDashboard from './HistoryDashboard';
-import { Eye, EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing } from 'lucide-react';
+import { Eye, EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing, Download } from 'lucide-react';
 import { getModeName, FILES, RANKS } from '../utils/chessLogic';
 import OpeningExplorer from './OpeningExplorer';
 import LatestNews from './LatestNews';
@@ -9,6 +10,31 @@ import PieceGuide from './PieceGuide';
 export default function MenuScreen({ onStartGame, history, t, lang }) {
 
 
+
+
+    const statsRef = useRef(null);
+
+    const handleDownloadReport = async () => {
+        if (!statsRef.current) return;
+
+        try {
+            const canvas = await html2canvas(statsRef.current, {
+                backgroundColor: '#111',
+                scale: 2,
+                logging: false,
+                useCORS: true
+            });
+
+            const image = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            const date = new Date().toISOString().split('T')[0];
+            link.href = image;
+            link.download = `ChessWarmup-Report-${date}.png`;
+            link.click();
+        } catch (err) {
+            console.error("Report download failed:", err);
+        }
+    };
 
     return (
         <div className="flex flex-col gap-12 w-full max-w-6xl items-center">
@@ -81,7 +107,21 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
                 </div>
 
                 {/* RIGHT COLUMN: HISTORY & HEATMAP */}
-                <HistoryDashboard history={history} t={t} lang={lang} />
+                <div className="flex flex-col gap-4 w-full max-w-md">
+                    <div ref={statsRef}>
+                        <HistoryDashboard history={history} t={t} lang={lang} />
+                    </div>
+
+                    <button
+                        onClick={handleDownloadReport}
+                        className="w-full py-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all group flex items-center justify-center gap-3 backdrop-blur-md active:scale-95"
+                    >
+                        <Download className="w-5 h-5 text-aqua group-hover:scale-110 transition-transform" />
+                        <span className="font-bold text-slate-300 group-hover:text-white transition-colors uppercase tracking-wider text-sm">
+                            {t.downloadReport}
+                        </span>
+                    </button>
+                </div>
             </div>
 
             {/* PIECE GUIDE */}
