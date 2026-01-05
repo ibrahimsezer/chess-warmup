@@ -1,5 +1,4 @@
-import React from 'react';
-import { FILES, RANKS, getSquareColor } from '../utils/chessLogic';
+import { FILES, getSquareColor } from '../utils/chessLogic';
 import { Castle, ChessKnight, ChessBishop, ChessKing, Crown, ChessPawn } from 'lucide-react';
 
 // Mapping piece types to Icons

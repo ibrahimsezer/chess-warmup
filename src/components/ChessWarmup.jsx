@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Globe } from 'lucide-react'; // Globe ikonu eklendi
 import { getRandomSquare, getSquareColor, generateMovePuzzle } from '../utils/chessLogic';
 import { translations } from '../utils/translations'; // Çeviriler eklendi

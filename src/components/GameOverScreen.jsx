@@ -1,4 +1,3 @@
-import React from 'react';
 import { Trophy, RotateCcw } from 'lucide-react';
 
 export default function GameOverScreen({ score, onMenu, onRestart, mode, t }) {

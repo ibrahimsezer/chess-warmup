@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BookOpen, Sword, Shield, Crown, ChevronDown, ChevronRight, Hash } from 'lucide-react';
 import OpeningSimulation from './OpeningSimulation';
 

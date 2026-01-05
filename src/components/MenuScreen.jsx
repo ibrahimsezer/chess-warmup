@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import HistoryDashboard from './HistoryDashboard';
-import { Eye, EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing, Download } from 'lucide-react';
-import { getModeName, FILES, RANKS } from '../utils/chessLogic';
+import { EyeOff, Grid3X3, MousePointer2, Castle, ChessKnight, ChessBishop, ChessKing, Download } from 'lucide-react';
 import OpeningExplorer from './OpeningExplorer';
 import LatestNews from './LatestNews';
 import PieceGuide from './PieceGuide';

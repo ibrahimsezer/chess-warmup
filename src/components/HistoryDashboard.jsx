@@ -1,4 +1,3 @@
-import React from 'react';
 import { History, BarChart2 } from 'lucide-react';
 import ChessBoard from './ChessBoard';
 import { getModeName, FILES, RANKS } from '../utils/chessLogic';

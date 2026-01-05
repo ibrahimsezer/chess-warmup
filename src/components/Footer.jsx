@@ -1,5 +1,3 @@
-import React from 'react';
-import { Linkedin, Youtube } from 'lucide-react';
 
 const Footer = () => {
     return (
