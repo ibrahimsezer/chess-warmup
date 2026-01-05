@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BookOpen, Sword, Shield, Crown, ChevronDown, ChevronRight, Hash } from 'lucide-react';
+import OpeningSimulation from './OpeningSimulation';
 
 const OPENINGS = [
     {
@@ -72,10 +73,10 @@ export default function OpeningExplorer({ lang = 'en' }) {
     };
 
     return (
-        <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/10 w-full max-w-md transition-all duration-300">
+        <div className="bg-white/5 backdrop-blur-md p-6 rounded-3xl shadow-xl border border-white/10 w-full transition-all duration-300">
             <div
                 onClick={toggleComponent}
-                className="flex items-center justify-between cursor-pointer group/header"
+                className="flex items-center justify-between cursor-pointer group/header mb-3"
             >
                 <h3 className="text-xl font-bold flex items-center gap-2 text-white mb-0">
                     <BookOpen className="w-5 h-5 text-aqua" />
@@ -87,8 +88,9 @@ export default function OpeningExplorer({ lang = 'en' }) {
                 }
             </div>
 
-            <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isComponentExpanded ? 'max-h-[800px] opacity-100 mt-6' : 'max-h-0 opacity-0 mt-0'}`}>
-                <div className="relative pl-6 border-l-2 border-aqua/30 space-y-8">
+            <div className={`transition-all duration-500 ease-in-out overflow-hidden ${isComponentExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                {/* Horizontal Scroll Container */}
+                <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-aqua/20 scrollbar-track-transparent">
                     {OPENINGS.map((opening) => {
                         const Icon = opening.icon;
                         const isExpanded = expandedId === opening.id;
@@ -96,32 +98,41 @@ export default function OpeningExplorer({ lang = 'en' }) {
                         const description = opening.description[lang] || opening.description.en;
 
                         return (
-                            <div key={opening.id} className="relative group">
-                                {/* Timeline Node */}
-                                <div className={`absolute -left-[33px] top-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors duration-300 bg-[#1a1a1a] ${isExpanded ? 'border-aqua text-aqua' : 'border-aqua/50 text-slate-500 group-hover:border-aqua/80 group-hover:text-aqua/80'}`}>
-                                    <Icon className="w-4 h-4" />
-                                </div>
-
-                                {/* Content */}
+                            <div
+                                key={opening.id}
+                                className={`relative group flex-shrink-0 w-80 lg:w-96 transition-all duration-300 rounded-2xl border ${isExpanded ? 'border-aqua bg-white/10' : 'border-white/5 bg-black/20 hover:bg-black/40 hover:border-white/10'}`}
+                            >
+                                {/* Header (Clickable Area) */}
                                 <div
                                     onClick={() => toggleExpand(opening.id)}
-                                    className="cursor-pointer transition-all duration-300"
+                                    className="p-4 cursor-pointer flex items-center gap-4 border-b border-transparent group-hover:border-white/5"
                                 >
-                                    <div className="flex justify-between items-start">
-                                        <h4 className={`text-lg font-bold transition-colors ${isExpanded ? 'text-aqua' : 'text-slate-300 group-hover:text-aqua'}`}>
+                                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 bg-[#1a1a1a] ${isExpanded ? 'text-aqua' : 'text-slate-500 group-hover:text-aqua/80'}`}>
+                                        <Icon className="w-5 h-5" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className={`text-lg font-bold transition-colors ${isExpanded ? 'text-aqua' : 'text-slate-300 group-hover:text-white'}`}>
                                             {name}
                                         </h4>
-                                        {isExpanded ? <ChevronDown className="w-4 h-4 text-slate-500" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+                                        <span className="text-xs font-mono text-slate-500 mt-1 block">
+                                            {opening.moves}
+                                        </span>
                                     </div>
+                                    {isExpanded ? <ChevronDown className="w-4 h-4 text-slate-500" /> : <ChevronRight className="w-4 h-4 text-slate-500" />}
+                                </div>
 
-                                    <span className="text-xs font-mono text-slate-500 bg-black/20 px-2 py-0.5 rounded border border-white/5 inline-block mt-1 mb-2">
-                                        {opening.moves}
-                                    </span>
-
-                                    <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-40 opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
-                                        <p className="text-sm text-slate-400 leading-relaxed border-t border-white/5 pt-2">
+                                {/* Content Body */}
+                                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                                    <div
+                                        className="p-4 pt-2 border-t border-white/5"
+                                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking content
+                                    >
+                                        <p className="text-sm text-slate-400 leading-relaxed mb-4">
                                             {description}
                                         </p>
+                                        <div className="flex justify-center w-full">
+                                            <OpeningSimulation pgn={opening.moves} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

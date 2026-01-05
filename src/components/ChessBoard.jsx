@@ -1,6 +1,6 @@
 import React from 'react';
 import { FILES, RANKS, getSquareColor } from '../utils/chessLogic';
-import { Castle, ChessKnight, ChessBishop, ChessKing, Crown } from 'lucide-react';
+import { Castle, ChessKnight, ChessBishop, ChessKing, Crown, ChessPawn } from 'lucide-react';
 
 // Mapping piece types to Icons
 const PIECE_ICONS = {
@@ -8,7 +8,8 @@ const PIECE_ICONS = {
     'N': ChessKnight,
     'B': ChessBishop,
     'K': ChessKing,
-    'Q': Crown // Using Crown for Queen as Lucide typically doesn't have ChessQueen, or use Crown as fallback
+    'Q': Crown, // Using Crown for Queen as Lucide typically doesn't have ChessQueen, or use Crown as fallback
+    'P': ChessPawn
 };
 
 export default function ChessBoard({
@@ -19,6 +20,7 @@ export default function ChessBoard({
     onSquareClick,
     isHeatmapMode = false,
     heatmapData = null,
+    isResponsive = false,
     pieces = {} // Format: { "a1": { type: 'R', color: 'white' } }
 }) {
     const renderRanks = orientation === 'white' ? [8, 7, 6, 5, 4, 3, 2, 1] : [1, 2, 3, 4, 5, 6, 7, 8];
@@ -120,7 +122,7 @@ export default function ChessBoard({
                         <div
                             key={`${file}${rank}`}
                             onClick={() => !isHeatmapMode && onSquareClick(originalFileIdx, rank)}
-                            className={`flex items-center justify-center relative ${isHeatmapMode ? 'w-6 h-6 md:w-8 md:h-8 text-[8px]' : 'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 cursor-pointer hover:opacity-90'} transition-colors ${!isHeatmapMode && cellClass} ${heatmapBorderClass} ${isHeatmapMode && cellClass}`}
+                            className={`flex items-center justify-center relative ${isHeatmapMode ? 'w-6 h-6 md:w-8 md:h-8 text-[8px]' : (isResponsive ? 'w-full aspect-square cursor-default' : 'w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 cursor-pointer hover:opacity-90')} transition-colors ${!isHeatmapMode && cellClass} ${heatmapBorderClass} ${isHeatmapMode && cellClass}`}
                         >
                             {/* Render Piece or Heatmap Content */}
                             {content}

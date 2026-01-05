@@ -102,8 +102,6 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
                         </div>
                     </div>
 
-                    {/* NEW OPENING EXPLORER COMPONENT */}
-                    <OpeningExplorer lang={lang} />
                 </div>
 
                 {/* RIGHT COLUMN: HISTORY & HEATMAP */}
@@ -124,13 +122,19 @@ export default function MenuScreen({ onStartGame, history, t, lang }) {
                 </div>
             </div>
 
+
+
+            {/* OPENING EXPLORER (Sideways Scrollable) */}
+            <OpeningExplorer lang={lang} />
+
             {/* PIECE GUIDE */}
             <PieceGuide lang={lang} />
 
             {/* LATEST NEWS */}
             <LatestNews lang={lang} />
-        </div>
 
+
+        </div>
     );
 }
 
